@@ -7,12 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script type="module">
-  import emailjs from "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.mjs";
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
   const EMAILJS_PUBLIC_KEY  = "433tnpJ3aGw7zmeHt";
   const EMAILJS_SERVICE_ID  = "service_gjs5zyl";
   const EMAILJS_TEMPLATE_ID = "template_5qpde36";
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   window.__sendLinkEmail = function (toEmail) {
     return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email: toEmail,
