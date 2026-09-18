@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How a star is born</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="module">
+  import emailjs from "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.mjs";
+  const EMAILJS_PUBLIC_KEY  = "433tnpJ3aGw7zmeHt";
+  const EMAILJS_SERVICE_ID  = "service_gjs5zyl";
+  const EMAILJS_TEMPLATE_ID = "template_5qpde36";
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+  window.__sendLinkEmail = function (toEmail) {
+    return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: toEmail,
+      link: window.location.href
+    });
+  };
+</script>
+<style>
+  :root {
+    --bg: #0B1026;
+    --bg-panel: #121936;
+    --text: #F1EEE6;
+    --text-dim: #A8AEC4;
+    --accent: #E8B04B;
+    --accent-dim: #8B6A2C;
+    --rule: #2A3157;
+    --focus: #E8B04B;
+  }
+  :root[data-theme="light"] {
+    --bg: #F6F4EE;
+    --bg-panel: #FFFFFF;
+    --text: #191A22;
+    --text-dim: #5B5F73;
+    --accent: #B4791F;
+    --accent-dim: #E3C48A;
+    --rule: #E1DED2;
+    --focus: #B4791F;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F6F4EE;
+      --bg-panel: #FFFFFF;
+      --text: #191A22;
+      --text-dim: #5B5F73;
+      --accent: #B4791F;
+      --accent-dim: #E3C48A;
+      --rule: #E1DED2;
+      --focus: #B4791F;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 15%, var(--text-dim) 40%, transparent 41%),
+      radial-gradient(1.5px 1.5px at 75% 8%, var(--text-dim) 40%, transparent 41%),
+      radial-gradient(1px 1px at 60% 25%, var(--text-dim) 40%, transparent 41%),
+      radial-gradient(1px 1px at 90% 40%, var(--text-dim) 40%, transparent 41%),
+      radial-gradient(1.5px 1.5px at 10% 45%, var(--text-dim) 40%, transparent 41%),
+      radial-gradient(1px 1px at 35% 6%, var(--text-dim) 40%, transparent 41%);
+    background-repeat: no-repeat;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 64px 24px 96px; }
+  h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 6vw, 2.9rem);
+    line-height: 1.15;
+    margin: 0 0 20px;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    text-align: center;
+    max-width: 46ch;
+    margin: 0 auto 40px;
+  }
+  .lede em { font-style: normal; color: var(--text); }
+  .primary-action { display: block; text-align: center; margin: 0 0 56px; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #14101A;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 4px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary:hover { transform: translateY(-1px); }
+  .btn-primary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .primary-action .hint { display: block; margin-top: 10px; font-size: 0.9rem; color: var(--text-dim); }
+  hr.divider { border: none; border-top: 1px solid var(--rule); margin: 0 0 40px; }
+  .keep-panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 28px 28px 30px;
+    text-align: center;
+  }
+  .keep-panel h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 1.3rem; margin: 0 0 10px; }
+  .keep-panel p { color: var(--text-dim); font-size: 0.98rem; margin: 0 0 22px; max-width: 40ch; margin-left: auto; margin-right: auto; }
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--rule);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 13px 26px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-secondary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(5, 7, 20, 0.72);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px; z-index: 10;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: var(--bg-panel); border: 1px solid var(--rule); border-radius: 8px; padding: 28px; max-width: 380px; width: 100%; }
+  .modal h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 1.2rem; margin: 0 0 8px; }
+  .modal p { color: var(--text-dim); font-size: 0.92rem; margin: 0 0 18px; }
+  .modal label { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; }
+  .modal input[type="email"] {
+    width: 100%; padding: 12px 14px; font-size: 1rem; font-family: 'Inter', sans-serif;
+    border: 1.5px solid var(--rule); border-radius: 4px; background: var(--bg); color: var(--text); margin-bottom: 16px;
+  }
+  .modal input[type="email"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .modal-actions { display: flex; gap: 10px; }
+  .modal-actions button { flex: 1; }
+  .btn-cancel { background: transparent; border: 1.5px solid var(--rule); color: var(--text-dim); font-family: 'Inter', sans-serif; font-weight: 500; padding: 12px 0; border-radius: 4px; cursor: pointer; }
+  .btn-send { background: var(--accent); border: none; color: #14101A; font-family: 'Inter', sans-serif; font-weight: 600; padding: 12px 0; border-radius: 4px; cursor: pointer; }
+  .confirm { text-align: center; }
+  .confirm .check { font-size: 2rem; margin-bottom: 10px; display: block; }
+  footer { text-align: center; margin-top: 56px; font-size: 0.8rem; color: var(--text-dim); }
+  @media (prefers-reduced-motion: reduce) { .btn-primary { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>How a star is born</h1>
+  <p class="lede">Every star, including our sun, began as a cold cloud of gas and dust that <em>slowly collapsed under its own gravity</em>. Here's where to read the full explanation.</p>
+
+  <div class="primary-action">
+    <a class="btn-primary" href="https://en.wikipedia.org/wiki/Star_formation" target="_blank" rel="noopener">
+      Read the full article
+    </a>
+    <span class="hint">Opens the Wikipedia page on star formation</span>
+  </div>
+
+  <hr class="divider">
+
+  <div class="keep-panel">
+    <h2>Want to find this again later?</h2>
+    <p>We'll email you this link so you don't have to remember it.</p>
+    <button class="btn-secondary" id="openModalBtn">Email me this link</button>
+  </div>
+
+  <footer>Tap the QR or NFC tag anytime to come straight back to this page.</footer>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modalContent">
+    <div id="formState">
+      <h3>Email me this link</h3>
+      <p>We'll only use this to send the link once.</p>
+      <label for="emailInput">Your email address</label>
+      <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancelBtn">Cancel</button>
+        <button class="btn-send" id="sendBtn">Send</button>
+      </div>
+    </div>
+    <div id="confirmState" class="confirm" style="display:none;">
+      <span class="check">✓</span>
+      <h3>Link sent</h3>
+      <p>Check your inbox — it should arrive within a minute.</p>
+      <button class="btn-secondary" id="doneBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const backdrop = document.getElementById('modalBackdrop');
+  const openBtn = document.getElementById('openModalBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const sendBtn = document.getElementById('sendBtn');
+  const doneBtn = document.getElementById('doneBtn');
+  const formState = document.getElementById('formState');
+  const confirmState = document.getElementById('confirmState');
+  const emailInput = document.getElementById('emailInput');
+
+  function openModal() {
+    backdrop.classList.add('open');
+    formState.style.display = 'block';
+    confirmState.style.display = 'none';
+    emailInput.value = '';
+    setTimeout(() => emailInput.focus(), 50);
+  }
+  function closeModal() { backdrop.classList.remove('open'); }
+
+  openBtn.addEventListener('click', openModal);
+  cancelBtn.addEventListener('click', closeModal);
+  doneBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  sendBtn.addEventListener('click', () => {
+    const val = emailInput.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    if (!valid) {
+      emailInput.style.borderColor = '#C24E4E';
+      emailInput.focus();
+      return;
+    }
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending…';
+
+    if (window.__sendLinkEmail) {
+      window.__sendLinkEmail(val)
+        .then(() => {
+          formState.style.display = 'none';
+          confirmState.style.display = 'block';
+        })
+        .catch((err) => {
+          console.error('EmailJS error:', err);
+          emailInput.style.borderColor = '#C24E4E';
+        })
+        .finally(() => {
+          sendBtn.disabled = false;
+          sendBtn.textContent = 'Send';
+        });
+    } else {
+      formState.style.display = 'none';
+      confirmState.style.display = 'block';
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send';
+    }
+  });
+</script>
+
+</body>
+</html>
