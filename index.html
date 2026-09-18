@@ -12,11 +12,13 @@
   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
 <script type="text/javascript">
+  // ---- EmailJS setup ----
   const EMAILJS_PUBLIC_KEY  = "433tnpJ3aGw7zmeHt";
   const EMAILJS_SERVICE_ID  = "service_gjs5zyl";
   const EMAILJS_TEMPLATE_ID = "template_5qpde36";
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
   window.__sendLinkEmail = function (toEmail) {
     return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email: toEmail,
@@ -35,6 +37,7 @@
     --rule: #2A3157;
     --focus: #E8B04B;
   }
+  :root:not([data-theme="light"]) { }
   :root[data-theme="light"] {
     --bg: #F6F4EE;
     --bg-panel: #FFFFFF;
@@ -57,6 +60,7 @@
       --focus: #B4791F;
     }
   }
+
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
@@ -74,8 +78,24 @@
       radial-gradient(1.5px 1.5px at 10% 45%, var(--text-dim) 40%, transparent 41%),
       radial-gradient(1px 1px at 35% 6%, var(--text-dim) 40%, transparent 41%);
     background-repeat: no-repeat;
+    opacity: 1;
   }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 64px 24px 96px; }
+  :root[data-theme="light"] body,
+  @media (prefers-color-scheme: light) { body { background-image: none; } }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  .eyebrow-img {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto 40px;
+  }
+
   h1 {
     font-family: 'Newsreader', Georgia, serif;
     font-weight: 600;
@@ -85,6 +105,7 @@
     text-align: center;
     letter-spacing: -0.01em;
   }
+
   .lede {
     font-size: 1.15rem;
     color: var(--text-dim);
@@ -92,8 +113,18 @@
     max-width: 46ch;
     margin: 0 auto 40px;
   }
-  .lede em { font-style: normal; color: var(--text); }
-  .primary-action { display: block; text-align: center; margin: 0 0 56px; }
+
+  .lede em {
+    font-style: normal;
+    color: var(--text);
+  }
+
+  .primary-action {
+    display: block;
+    text-align: center;
+    margin: 0 0 56px;
+  }
+
   .btn-primary {
     display: inline-block;
     background: var(--accent);
@@ -107,9 +138,24 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .btn-primary:hover { transform: translateY(-1px); }
-  .btn-primary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-  .primary-action .hint { display: block; margin-top: 10px; font-size: 0.9rem; color: var(--text-dim); }
-  hr.divider { border: none; border-top: 1px solid var(--rule); margin: 0 0 40px; }
+  .btn-primary:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .primary-action .hint {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 40px;
+  }
+
   .keep-panel {
     background: var(--bg-panel);
     border: 1px solid var(--rule);
@@ -117,8 +163,23 @@
     padding: 28px 28px 30px;
     text-align: center;
   }
-  .keep-panel h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 1.3rem; margin: 0 0 10px; }
-  .keep-panel p { color: var(--text-dim); font-size: 0.98rem; margin: 0 0 22px; max-width: 40ch; margin-left: auto; margin-right: auto; }
+
+  .keep-panel h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0 0 10px;
+  }
+
+  .keep-panel p {
+    color: var(--text-dim);
+    font-size: 0.98rem;
+    margin: 0 0 22px;
+    max-width: 40ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .btn-secondary {
     display: inline-block;
     background: transparent;
@@ -132,31 +193,108 @@
     cursor: pointer;
   }
   .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-secondary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .btn-secondary:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  /* Modal */
   .modal-backdrop {
-    position: fixed; inset: 0;
+    position: fixed;
+    inset: 0;
     background: rgba(5, 7, 20, 0.72);
-    display: none; align-items: center; justify-content: center;
-    padding: 20px; z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
   }
   .modal-backdrop.open { display: flex; }
-  .modal { background: var(--bg-panel); border: 1px solid var(--rule); border-radius: 8px; padding: 28px; max-width: 380px; width: 100%; }
-  .modal h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 1.2rem; margin: 0 0 8px; }
-  .modal p { color: var(--text-dim); font-size: 0.92rem; margin: 0 0 18px; }
-  .modal label { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; }
-  .modal input[type="email"] {
-    width: 100%; padding: 12px 14px; font-size: 1rem; font-family: 'Inter', sans-serif;
-    border: 1.5px solid var(--rule); border-radius: 4px; background: var(--bg); color: var(--text); margin-bottom: 16px;
+
+  .modal {
+    background: var(--bg-panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px;
+    max-width: 380px;
+    width: 100%;
   }
-  .modal input[type="email"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-  .modal-actions { display: flex; gap: 10px; }
+  .modal h3 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 0 0 8px;
+  }
+  .modal p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    margin: 0 0 18px;
+  }
+  .modal label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .modal input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    border: 1.5px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .modal input[type="email"]:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+  }
   .modal-actions button { flex: 1; }
-  .btn-cancel { background: transparent; border: 1.5px solid var(--rule); color: var(--text-dim); font-family: 'Inter', sans-serif; font-weight: 500; padding: 12px 0; border-radius: 4px; cursor: pointer; }
-  .btn-send { background: var(--accent); border: none; color: #14101A; font-family: 'Inter', sans-serif; font-weight: 600; padding: 12px 0; border-radius: 4px; cursor: pointer; }
-  .confirm { text-align: center; }
-  .confirm .check { font-size: 2rem; margin-bottom: 10px; display: block; }
-  footer { text-align: center; margin-top: 56px; font-size: 0.8rem; color: var(--text-dim); }
-  @media (prefers-reduced-motion: reduce) { .btn-primary { transition: none; } }
+  .btn-cancel {
+    background: transparent;
+    border: 1.5px solid var(--rule);
+    color: var(--text-dim);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    padding: 12px 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn-send {
+    background: var(--accent);
+    border: none;
+    color: #14101A;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 12px 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .confirm {
+    text-align: center;
+  }
+  .confirm .check {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 56px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -194,6 +332,7 @@
         <button class="btn-cancel" id="cancelBtn">Cancel</button>
         <button class="btn-send" id="sendBtn">Send</button>
       </div>
+      <p id="debugMsg" style="color:#C24E4E; font-size:0.85rem; margin-top:14px; margin-bottom:0; word-break:break-word;"></p>
     </div>
     <div id="confirmState" class="confirm" style="display:none;">
       <span class="check">✓</span>
@@ -213,15 +352,19 @@
   const formState = document.getElementById('formState');
   const confirmState = document.getElementById('confirmState');
   const emailInput = document.getElementById('emailInput');
+  const debugMsg = document.getElementById('debugMsg');
 
   function openModal() {
     backdrop.classList.add('open');
     formState.style.display = 'block';
     confirmState.style.display = 'none';
     emailInput.value = '';
+    debugMsg.textContent = '';
     setTimeout(() => emailInput.focus(), 50);
   }
-  function closeModal() { backdrop.classList.remove('open'); }
+  function closeModal() {
+    backdrop.classList.remove('open');
+  }
 
   openBtn.addEventListener('click', openModal);
   cancelBtn.addEventListener('click', closeModal);
@@ -230,6 +373,7 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   sendBtn.addEventListener('click', () => {
+    debugMsg.textContent = '';
     const val = emailInput.value.trim();
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
     if (!valid) {
@@ -240,23 +384,24 @@
     sendBtn.disabled = true;
     sendBtn.textContent = 'Sending…';
 
-    if (window.__sendLinkEmail) {
+    if (typeof window.__sendLinkEmail === 'function') {
       window.__sendLinkEmail(val)
         .then(() => {
           formState.style.display = 'none';
           confirmState.style.display = 'block';
         })
         .catch((err) => {
-          console.error('EmailJS error:', err);
           emailInput.style.borderColor = '#C24E4E';
+          const detail = (err && (err.text || err.message)) ? (err.text || err.message) : JSON.stringify(err);
+          debugMsg.textContent = 'Error: ' + detail;
         })
         .finally(() => {
           sendBtn.disabled = false;
           sendBtn.textContent = 'Send';
         });
     } else {
-      formState.style.display = 'none';
-      confirmState.style.display = 'block';
+      emailInput.style.borderColor = '#C24E4E';
+      debugMsg.textContent = 'Error: EmailJS did not load on this page (window.__sendLinkEmail is missing). Check that both <script> tags near the top of the file are present and not blocked.';
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send';
     }
